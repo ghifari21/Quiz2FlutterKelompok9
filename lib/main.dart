@@ -12,6 +12,10 @@ class MyApp extends StatefulWidget {
 
 class MyAppState extends State<MyApp> {
   String optionDate = "1 Januari 2023";
+  List<Map<String, dynamic>> listData = [
+    {'key':'Walking', 'value':3},
+    {'key':'Driving', 'value':10}
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -129,8 +133,44 @@ class MyAppState extends State<MyApp> {
                 ],
               ),
             ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: listData.length,
+                itemBuilder: (context, index){
+                  return Card(
+                    child: ListTile(
+                      leading:  
+                        Image.network(
+                          'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
+                          height: 50,
+                        ),
+                      title: 
+                        Text(
+                          listData[index]['key'],
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      subtitle:
+                        Text(
+                          '${listData[index]['value']} km',
+                          style: const TextStyle(
+                            fontSize: 12,
+                            color: Colors.grey
+                          )
+                        ),
+                      trailing: 
+                        const Icon(
+                          Icons.more_vert,
+                          color: Color.fromARGB(255, 143, 143, 143),
+                        ),
+                      onTap:(){
+                        
+                      },
+                    )
+                  );
+                }
+              )
+            )
           ],
-          //TODO LISTVIEW BUILDER
         ),
       ),
     );
@@ -177,7 +217,7 @@ class ButtonPerjanjian extends StatelessWidget {
         // icon setting ditap
         const snackBar = SnackBar(
           duration: Duration(seconds: 20),
-          content: Text('Kami berjanji  tidak akan berbuat curang dan atau membantu kelompok lain berbuat curang'),
+          content: Text('Kami berjanji tidak akan berbuat curang dan atau membantu kelompok lain berbuat curang'),
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
       },
